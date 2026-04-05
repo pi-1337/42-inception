@@ -1,0 +1,46 @@
+
+services:
+  nginx:
+    build: services/nginx
+    image: nginx:jesus
+    container_name: nginx
+    ports:
+      - 3000:80
+    expose:
+      - 80
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_files:/var/www/wordpress
+    networks:
+      - my_network
+
+  wordpress:
+    build: services/wordpress
+    image: wordpress:jesus
+    container_name: wordpress
+    expose:
+      - 9000
+    depends_on:
+      - mariadb
+    env_file: .env
+    volumes:
+      - wp_files:/var/www/wordpress
+    networks:
+      - my_network
+
+  mariadb:
+    build: services/mariadb
+    image: mariadb:jesus
+    container_name: mariadb
+    expose:
+      - 3306
+    env_file: .env
+    networks:
+      - my_network
+
+volumes:
+  wp_files:
+
+networks:
+  my_network:
