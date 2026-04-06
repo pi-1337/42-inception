@@ -1,7 +1,7 @@
 
 services:
   nginx:
-    build: services/nginx
+    build: srcs/services/nginx
     image: nginx:jesus
     container_name: nginx
     ports:
@@ -17,7 +17,7 @@ services:
     restart: always
 
   wordpress:
-    build: services/wordpress
+    build: srcs/services/wordpress
     image: wordpress:jesus
     container_name: wordpress
     expose:
@@ -32,7 +32,7 @@ services:
     restart: always
 
   mariadb:
-    build: services/mariadb
+    build: srcs/services/mariadb
     image: mariadb:jesus
     container_name: mariadb
     expose:
