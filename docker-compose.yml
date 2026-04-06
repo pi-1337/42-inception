@@ -5,15 +5,16 @@ services:
     image: nginx:jesus
     container_name: nginx
     ports:
-      - 80:80
+      - 443:443
     expose:
-      - 80
+      - 443
     depends_on:
       - wordpress
     volumes:
-      - wp_files:/var/www/wordpress
+      - wp:/var/www/wordpress
     networks:
       - my_network
+    restart: always
 
   wordpress:
     build: services/wordpress
@@ -25,9 +26,10 @@ services:
       - mariadb
     env_file: .env
     volumes:
-      - wp_files:/var/www/wordpress
+      - wp:/var/www/wordpress
     networks:
       - my_network
+    restart: always
 
   mariadb:
     build: services/mariadb
@@ -38,9 +40,25 @@ services:
     env_file: .env
     networks:
       - my_network
-
-volumes:
-  wp_files:
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
 
 networks:
   my_network:
+
+
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/kali/data/wp
+
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/kali/data/db
