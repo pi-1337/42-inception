@@ -1,13 +1,13 @@
 
 services:
   nginx:
-    build: srcs/services/nginx
+    build: ./services/nginx
     image: nginx:jesus
     container_name: nginx
     ports:
-      - 443:443
+      - 3000:443
     expose:
-      - 443
+      - 3000
     depends_on:
       - wordpress
     volumes:
@@ -17,7 +17,7 @@ services:
     restart: always
 
   wordpress:
-    build: srcs/services/wordpress
+    build: ./services/wordpress
     image: wordpress:jesus
     container_name: wordpress
     expose:
@@ -32,7 +32,7 @@ services:
     restart: always
 
   mariadb:
-    build: srcs/services/mariadb
+    build: ./services/mariadb
     image: mariadb:jesus
     container_name: mariadb
     expose:
@@ -54,11 +54,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/kali/data/wp
+      device: /home/ioulkhir/data/wp
 
   db:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/kali/data/db
+      device: /home/ioulkhir/data/db
