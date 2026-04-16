@@ -1,9 +1,8 @@
 DOCKER_COMPOSE_CLI = docker compose -f ./srcs/docker-compose.yml
-SUDO = sudo
 
 all: volumes
 	@echo "[ RUNNING THE CONTAINERS ... ]"
-	@$(SUDO) $(DOCKER_COMPOSE_CLI) up -d
+	@$(DOCKER_COMPOSE_CLI) up -d
 
 volumes:
 	@echo "[ CREATING VOLUMES DIRECTOIRES ... ]"
@@ -11,24 +10,25 @@ volumes:
 	@mkdir -p /home/ioulkhir/data/wp
 	@echo "[ DONE ✅ ]"
 
+start:
+	@echo "[ STARTING THE CONTAINERS ... ]"
+	@$(DOCKER_COMPOSE_CLI) start
+	@echo "[ DONE ✅ ]"
+
 stop:
 	@echo "[ STOPPING THE CONTAINERS ... ]"
-	@$(SUDO) $(DOCKER_COMPOSE_CLI) stop
+	@$(DOCKER_COMPOSE_CLI) stop
 	@echo "[ DONE ✅ ]"
 
 clean:
-	@echo "[ DELETING CONTAINERS ... ]"
-	@$(SUDO) docker rm $($(SUDO) docker container ls -qa)
-	@echo "[ DONE ✅ ]"
-
-	@echo "[ DELETING IMAGES ... ]"
-	@$(SUDO) docker rmi $($(SUDO) docker image ls -q)
+	@echo "[ DELETING CONTAINERS and NETWORKS ... ]"
+	@$(DOCKER_COMPOSE_CLI) down
 	@echo "[ DONE ✅ ]"
 
 
 fclean: clean
-	@echo "[ DELETING VOLUMES ... ]"
-	@$(SUDO) docker volume rm $($(SUDO) docker volume ls -q)
+	@echo "[ DELETING USELESS VOLUMES ... ]"
+	@docker volume prune -f
 	@echo "[ DONE ✅ ]"
 
 
