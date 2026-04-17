@@ -1,6 +1,6 @@
 This project has been created as part of the 42 curriculum by ioulkhir.
 # Description :
-This project is related to **System Administration**, It is about setting up a **containerized** web application using `docker` and `compose`, Solving the *it works on my machine* problem.
+This project is related to **System Administration**, It is about setting up a **containerized** web application using `docker` and `compose`, Solving the "*it works on my machine*" problem.
 # Instructions
 To compile the project, use the command below :
 ```bash
