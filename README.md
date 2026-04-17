@@ -32,4 +32,4 @@ Docker volumes are called *named volumes* whereas *bind mounts* are another type
 - **Named volumes**: handled completely by Docker (you cannot change the mount points).
 - **Bind mounts**: handled by Docker but not completely (you can specify the mount points).
 
-*(A simple analogy is that of C and Rust, C gives you more control and freedom and that is not very safe, however Rust gives more constraints and rules which results in more safety.)*
+*(A simple analogy is that of C and Rust, C gives you more control and freedom and that is not very safe, however Rust gives more constraints and rules which provides more safety.)*
