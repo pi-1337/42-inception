@@ -1,21 +1,15 @@
 server {
     listen 443 ssl;
 
-    ssl_protocols TLSv1.3;
-
     ssl_certificate     /etc/nginx/ssl/certificate.cert;
     ssl_certificate_key /etc/nginx/ssl/private.key;
 
     root /var/www/wordpress;
     index index.php index.html;
 
-    location / {
-        try_files $uri $uri/ /index.php?$args;
-    }
-
     location ~ \.php$ {
         fastcgi_pass wordpress:9000;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	include fastcgi_params;
     }
 }

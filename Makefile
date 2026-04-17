@@ -1,5 +1,8 @@
 DOCKER_COMPOSE_CLI = docker compose -f ./srcs/docker-compose.yml
 
+IMAGES=nginx:jesus wordpress:jesus mariadb:jesus
+VOLUMES=srcs_wp srcs_db
+
 all: volumes
 	@echo "[ RUNNING THE CONTAINERS ... ]"
 	@$(DOCKER_COMPOSE_CLI) up -d
@@ -27,10 +30,17 @@ clean:
 
 
 fclean: clean
+	@echo "[ DELETING IMAGES ... ]"
+	@docker rmi $(IMAGES) -f
 	@echo "[ DELETING USELESS VOLUMES ... ]"
-	@docker volume prune -f
+	@docker volume rm $(VOLUMES) -f
+	@rm -fr /home/ioulkhir/data/db
+	@rm -fr /home/ioulkhir/data/wp
 	@echo "[ DONE ✅ ]"
 
+rebuild:
+	@echo "[ RUNNING THE CONTAINERS ... ]"
+	@$(DOCKER_COMPOSE_CLI) up --build -d
 
 re: fclean all
 
