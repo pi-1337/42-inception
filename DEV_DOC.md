@@ -6,7 +6,7 @@ To get the `.env` file that contains the environment variables, run this command
 cp /home/ioulkhir/.env ./srcs/.env
 ```
 ### DNS Resolution :
-We are using this domain in our project `ioulkhir.42.fr`, even though we do not actually have access to the sub-domain, don't worry this is not a 0-day.
+We are using this domain in our project `ioulkhir.42.fr`, even though we do not actually have access to the sub-domain. Now don't worry, this is not a 0-day.
 We are just tricking our machine to think we do have access to that sub-domain, this is how it is done on Kali Linux:
 ```bash
 vim /etc/hosts
@@ -60,7 +60,7 @@ $ docker volume rm <VOLUME_NAME> # remove volume if not used
 $ docker volume prune # remove all unused volumes
 ```
 ## Persistent Storage :
-Now because we are using volumes for storing our **wordpress** files and **mariadb** data, and since volumes have a different life-cycle than that of containers. This means even containers are stopped or even removed the data is still persistent.
+Now because we are using volumes for storing our **wordpress** files and **mariadb** data, and since volumes have a different life-cycle than that of containers. This means even when containers are stopped or even removed the data is still persistent.
 
 This is because using volumes is like mounting a directory inside the container to a directory in the virtual machine, if we go to `/home/ioulkhir/data/wp` for example, we are going to find this :
 ```bash
@@ -73,4 +73,4 @@ wp-admin	      	  wp-includes	        wp-trackback.php
 wp-blog-header.php    wp-links-opml.php     xmlrpc.php
 wp-comments-post.php  wp-load.php
 ```
-If you look closely, this is the same collection of files you find in a wordpress project, it did not exist there before running the containers, this is because this directory is *mounted* to `/var/www/wordpress` inside the container, any changes on one changes the other.
+If you look closely, this is the same collection of files you find in a wordpress project, it did not exist there before running the containers, this is because this directory is *mounted* to `/var/www/wordpress` inside the container, any changes on one directory changes the other (that's what mounted means).
