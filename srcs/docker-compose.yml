@@ -52,13 +52,12 @@ volumes:
   wp:
     driver: local
     driver_opts:
-      type: none
       o: bind
+      type: none
       device: /home/ioulkhir/data/wp
-
   db:
     driver: local
     driver_opts:
-      type: none
       o: bind
+      type: none
       device: /home/ioulkhir/data/db
